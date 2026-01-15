@@ -1,0 +1,49 @@
+.nav {
+  position: relative;
+  display: flex;
+  color: #1c2137;
+}
+.nav .head {
+  padding: 0.5em;
+  font-size: 1.5em;
+}
+.nav .tabs {
+  display: flex;
+  justify-content: end;
+}
+.nav button {
+  font-size: 1.2em;
+  font-weight: bolder;
+  color: inherit;
+  background-color: white;
+  border: none;
+  outline: none;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+.nav button[data-actived="true"] {
+  background-color: #dfe9f7;
+  border-bottom: 0.2em solid #265799;
+}
+.nav label {
+  font-size: 1.2em;
+}
+.nav > .pad {
+  flex: 1 1 auto;
+}
+
+.flex-center {
+  justify-self: center;
+  align-self: center;
+}
+
+.nav::after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  height: 6em;
+  background: linear-gradient(90deg, #265799, #559ccf);
+}

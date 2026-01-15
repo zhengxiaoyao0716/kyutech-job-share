@@ -1,0 +1,16 @@
+.search {
+  position: relative;
+  background-color: #e9ebf4;
+  color: gray;
+  border-radius: 1.2em;
+  padding: 0.4em;
+  margin: 0.5em;
+  box-sizing: border-box;
+}
+.search > input {
+  font-size: inherit;
+  background: none;
+  border: none;
+  outline: none;
+  padding-left: 0.5em;
+}
