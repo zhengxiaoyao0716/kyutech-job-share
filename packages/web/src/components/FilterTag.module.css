@@ -1,18 +1,40 @@
-.tag {
-  background: none;
-  color: #293f5c;
+.tag,
+.expand {
   font-size: 0.8em;
   padding: 0.2em 0.5em;
-  border: 1px solid #293f5c;
-  border-radius: 1em;
   line-height: 1em;
   margin: 0.2em;
   cursor: pointer;
   user-select: none;
 }
+.tag.border,
+.expand {
+  background: none;
+  color: #293f5c;
+  border: 1px solid #293f5c;
+  border-radius: 1em;
+}
+.tag.shadow {
+  background: #dce1e7;
+  border-radius: 0.5em;
+}
+
 .tag input {
   display: none;
 }
-.tag input:checked + span::after{
+.tag.checker input:checked + span::after {
   content: "❌";
+}
+
+.expand {
+  background: none;
+}
+
+.gallery {
+  background: white;
+  width: 50%;
+  margin: auto;
+  margin-top: 10%;
+  padding: 2em;
+  box-shadow: 0 0 0.1em 0 gray;
 }

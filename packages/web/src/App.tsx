@@ -1,40 +1,45 @@
 import type { ComponentType } from "react";
 import css from "./App.module.css";
+import Company, { useCompany } from "./components/Company";
 import FilterTag from "./components/FilterTag";
+import Login from "./components/Login";
+import { Modal } from "./components/Modal";
 import Nav, { useNavTab } from "./components/Nav";
-import Card from "./components/PinCard";
+import PinCard from "./components/PinCard";
 import { History } from "./hooks/history";
 
-const Tab0 = () => (
+const TabCompany = () => (
   <>
-    <Card>
+    <PinCard>
       <h2>
         <span>タグで絞り込む</span>
         <span>
           {["福岡", "東京", "IT", "メーカー", "夏インターン", "早期選考"].map(
             (value, i) => (
               <FilterTag value={value} key={i} />
-            )
+            ),
           )}
+          <FilterTag.Expand />
         </span>
       </h2>
-    </Card>
+    </PinCard>
     <br />
     <div>
       {[
         { name: "株式会社未来技術" },
         { name: "グローバルソリューションズ" },
       ].map(({ name }, i) => (
-        <Card key={i}>
-          <h2>{name}</h2>
-        </Card>
+        <Company key={i} name={name} />
       ))}
+    </div>
+    <div>
+      <FilterTag.Gallery />
     </div>
   </>
 );
-const Tab1 = () => (
+const TabAccess = () => (
   <>
-    <Card>
+    <PinCard>
       <h2>
         <span>ユーザーを探す</span>
         <span>
@@ -43,32 +48,57 @@ const Tab1 = () => (
           ))}
         </span>
       </h2>
-    </Card>
+    </PinCard>
     <br />
     <div>
       {[
         { name: "佐藤 健太", cls: 2021 },
         { name: "田中 美咲 (仮名)", cls: 2023 },
       ].map(({ name, cls }, i) => (
-        <Card key={i}>
+        <PinCard key={i}>
           <h2>
             {name} | <span>{cls} 年卒</span>
           </h2>
-        </Card>
+        </PinCard>
       ))}
     </div>
   </>
 );
-const Tab404 = ({ tab }: { tab: number }) => (
-  <Card>
+const Tab404 = ({ tab }: { tab: string }) => (
+  <PinCard>
     <h1>404 Not Found (tab: {tab})</h1>
-  </Card>
+  </PinCard>
 );
-const Routes: ComponentType<{ tab: number }>[] = [Tab0, Tab1, Tab404];
+const Routes: { [tab: string]: ComponentType<{ tab: string }> } = {
+  company: TabCompany,
+  access: TabAccess,
+  profile: Tab404,
+};
 
 const Tab = () => {
+  const [company] = useCompany();
   const [tab] = useNavTab();
   const Route = Routes[tab] ?? Tab404;
+
+  if (!localStorage.getItem("user")) {
+    return (
+      <Modal>
+        <div className={css.app}>
+          <div>
+            <Login />
+          </div>
+        </div>
+      </Modal>
+    );
+  }
+  if (company) {
+    return (
+      <div className={css.app}>
+        <br />
+        <Tab404 tab="company" />
+      </div>
+    );
+  }
   return (
     <div className={css.app}>
       <br />
@@ -77,12 +107,10 @@ const Tab = () => {
   );
 };
 
-const App = () => {
-  return (
-    <History>
-      <Nav />
-      <Tab />
-    </History>
-  );
-};
+const App = () => (
+  <History>
+    <Nav />
+    <Tab />
+  </History>
+);
 export default App;

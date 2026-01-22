@@ -1,12 +1,14 @@
 import { useParams } from "../hooks/history";
+import { logout } from "./Login";
 import css from "./Nav.module.css";
 import Search from "./Search";
 
 export const useNavTab = () => {
   const [params, setParams] = useParams();
   return [
-    Number.parseInt(params.get("tab") ?? "0"),
-    (value: number) => setParams(() => (value <= 0 ? "" : `tab=${value}`)),
+    params.get("tab") ?? "company",
+    (value: string) =>
+      setParams(() => (value === "company" ? "" : `tab=${value}`)),
   ] as const;
 };
 
@@ -18,15 +20,30 @@ const Nav = () => {
         <b>九工大就活シャア</b>
       </div>
       <div id="tabs" className={css.tabs}>
-        {["企業レビュー", "OB・OG 訪問", "マイページ"].map((text, i) => (
-          <button key={i} data-actived={i === tab} onClick={() => setTab(i)}>
+        {Object.entries({
+          company: "企業レビュー",
+          access: "OB・OG 訪問",
+          profile: "マイページ",
+        }).map(([name, text]) => (
+          <button
+            key={name}
+            data-actived={name === tab}
+            onClick={() => setTab(name)}
+          >
             {text}
           </button>
         ))}
       </div>
       <div className={css.pad}></div>
       <div className={css["flex-center"]}>
-        <Search />
+        {localStorage.getItem("user") ? (
+          <>
+            <Search />
+            <a id="logout" onClick={logout}>
+              LOGOUT
+            </a>
+          </>
+        ) : null}
       </div>
     </div>
   );
