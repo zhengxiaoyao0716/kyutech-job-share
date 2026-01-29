@@ -5,9 +5,13 @@
   line-height: 1em;
   margin: 0.2em;
   cursor: pointer;
-  user-select: none;
+  white-space: nowrap;
+  & > input {
+    display: none;
+  }
 }
 .tag.border,
+.tag.checker,
 .expand {
   background: none;
   color: #293f5c;
@@ -17,13 +21,6 @@
 .tag.shadow {
   background: #dce1e7;
   border-radius: 0.5em;
-}
-
-.tag input {
-  display: none;
-}
-.tag.checker input:checked + span::after {
-  content: "❌";
 }
 
 .expand {
@@ -37,4 +34,54 @@
   margin-top: 10%;
   padding: 2em;
   box-shadow: 0 0 0.1em 0 gray;
+}
+
+.gallery {
+  color: #293f5c;
+}
+.gallery > div {
+  padding: 1em;
+}
+.gallery .tags {
+  font-size: 1.2em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.gallery .menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1em;
+}
+.gallery .menu > button {
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.2em 0.5em;
+  background: #293f5c;
+  color: white;
+  font-size: inherit;
+  cursor: pointer;
+}
+.gallery .search {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+.gallery .search > input {
+  flex: 1 1 auto;
+  border: none;
+  border-bottom: 1px solid #293f5c;
+  outline: none;
+  font-size: inherit;
+  color: inherit;
+}
+.gallery .search > button {
+  border: none;
+  background: none;
+  font-size: 1.5em;
+  cursor: pointer;
+}
+.gallery .pad {
+  flex: 1 1 auto;
 }

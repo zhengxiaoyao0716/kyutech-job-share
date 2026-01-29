@@ -1,0 +1,13 @@
+.review {
+  display: flex;
+}
+.review h3 {
+  color: #265799;
+}
+.review h3,
+.review p {
+  margin: 0.2em;
+}
+.avatar {
+  font-size: 3em;
+}

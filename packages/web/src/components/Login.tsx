@@ -51,7 +51,7 @@ const Login = () => {
   if (signupCode === null) {
     return (
       <form className={css.login}>
-        <h2>九工大就活シャア - ログイン</h2>
+        <h2>九工大就活シェア - ログイン</h2>
         <label>
           <b>メールアドレス</b>
           <input name="user" type="email" required />
@@ -62,7 +62,7 @@ const Login = () => {
         </label>
         <hr />
         <div className={css.buttons}>
-          <input type="submit" onClick={onLogin} value="登録" />
+          <input type="submit" onClick={onLogin} value="ログイン" />
           <button className="plain" onClick={() => setParams(() => "signup")}>
             <span>新規登録はこちら</span>
           </button>
@@ -72,7 +72,7 @@ const Login = () => {
   } else if (signupCode === "") {
     return (
       <form className={css.login}>
-        <h2>九工大就活シャア - 新規登録</h2>
+        <h2>九工大就活シェア - 新規登録</h2>
         <label>
           <b>メールアドレス</b>
           <input name="user" type="email" required />
@@ -98,7 +98,7 @@ const Login = () => {
   } else {
     return (
       <form className={css.login}>
-        <h2>九工大就活シャア - メール検証</h2>
+        <h2>九工大就活シェア - メール認証</h2>
         <label>
           <b>メールアドレス</b>
           <input name="user" type="email" required />
@@ -131,7 +131,7 @@ const Login = () => {
           </label>
         )}
         <div className={css.buttons}>
-          <input type="submit" onClick={onVerify} value="検証" />
+          <input type="submit" onClick={onVerify} value="認証" />
           <button className="plain" onClick={() => setParams(() => "signup")}>
             <span>新規登録に戻る</span>
           </button>

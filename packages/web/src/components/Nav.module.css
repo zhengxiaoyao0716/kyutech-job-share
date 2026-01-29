@@ -34,6 +34,7 @@
 
 .nav :global(#logout) {
   cursor: pointer;
+  font-size: 1.8em;
 }
 
 .flex-center {

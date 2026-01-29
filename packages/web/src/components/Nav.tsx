@@ -1,3 +1,4 @@
+import { MdOutlineAccountCircle } from "react-icons/md";
 import { useParams } from "../hooks/history";
 import { logout } from "./Login";
 import css from "./Nav.module.css";
@@ -17,7 +18,7 @@ const Nav = () => {
   return (
     <div className={css.nav}>
       <div className={css.head}>
-        <b>九工大就活シャア</b>
+        <b>九工大就活シェア</b>
       </div>
       <div id="tabs" className={css.tabs}>
         {Object.entries({
@@ -40,7 +41,7 @@ const Nav = () => {
           <>
             <Search />
             <a id="logout" onClick={logout}>
-              LOGOUT
+              <MdOutlineAccountCircle />
             </a>
           </>
         ) : null}

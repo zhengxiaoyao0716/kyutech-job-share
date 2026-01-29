@@ -1,12 +1,18 @@
 import type { ComponentType } from "react";
+import { IconContext } from "react-icons";
 import css from "./App.module.css";
+import Account from "./components/Account";
 import Company, { useCompany } from "./components/Company";
 import FilterTag from "./components/FilterTag";
 import Login from "./components/Login";
 import { Modal } from "./components/Modal";
 import Nav, { useNavTab } from "./components/Nav";
 import PinCard from "./components/PinCard";
+import Reviews from "./components/Reviews";
 import { History } from "./hooks/history";
+import { Lazy } from "./hooks/promise";
+import { pullAccounts } from "./services/account";
+import { pullCompanies } from "./services/company";
 
 const TabCompany = () => (
   <>
@@ -14,26 +20,28 @@ const TabCompany = () => (
       <h2>
         <span>タグで絞り込む</span>
         <span>
-          {["福岡", "東京", "IT", "メーカー", "夏インターン", "早期選考"].map(
-            (value, i) => (
-              <FilterTag value={value} key={i} />
-            ),
-          )}
+          <FilterTag.List />
           <FilterTag.Expand />
         </span>
       </h2>
     </PinCard>
     <br />
+    <Lazy task={pullCompanies}>
+      {(value) =>
+        Array.from({ length: Math.ceil(value.length / 2) }).map((_, i) => {
+          const props0 = value[(i << 1) + 0];
+          const props1 = value[(i << 1) + 1];
+          return (
+            <div key={i}>
+              {props0 ? <Company {...props0} /> : null}
+              {props1 ? <Company {...props1} /> : null}
+            </div>
+          );
+        })
+      }
+    </Lazy>
     <div>
-      {[
-        { name: "株式会社未来技術" },
-        { name: "グローバルソリューションズ" },
-      ].map(({ name }, i) => (
-        <Company key={i} name={name} />
-      ))}
-    </div>
-    <div>
-      <FilterTag.Gallery />
+      <FilterTag.Gallery kind="company" />
     </div>
   </>
 );
@@ -43,24 +51,28 @@ const TabAccess = () => (
       <h2>
         <span>ユーザーを探す</span>
         <span>
-          {["学科で絞り込む", "業界", "職種", "相談方法"].map((value, i) => (
-            <FilterTag value={value} key={i} />
-          ))}
+          <FilterTag.List />
+          <FilterTag.Expand />
         </span>
       </h2>
     </PinCard>
     <br />
+    <Lazy task={pullAccounts}>
+      {(value) =>
+        Array.from({ length: Math.ceil(value.length / 2) }).map((_, i) => {
+          const props0 = value[(i << 1) + 0];
+          const props1 = value[(i << 1) + 1];
+          return (
+            <div key={i}>
+              {props0 ? <Account {...props0} /> : null}
+              {props1 ? <Account {...props1} /> : null}
+            </div>
+          );
+        })
+      }
+    </Lazy>
     <div>
-      {[
-        { name: "佐藤 健太", cls: 2021 },
-        { name: "田中 美咲 (仮名)", cls: 2023 },
-      ].map(({ name, cls }, i) => (
-        <PinCard key={i}>
-          <h2>
-            {name} | <span>{cls} 年卒</span>
-          </h2>
-        </PinCard>
-      ))}
+      <FilterTag.Gallery kind="account" />
     </div>
   </>
 );
@@ -95,7 +107,7 @@ const Tab = () => {
     return (
       <div className={css.app}>
         <br />
-        <Tab404 tab="company" />
+        <Reviews name={company} />
       </div>
     );
   }
@@ -109,8 +121,12 @@ const Tab = () => {
 
 const App = () => (
   <History>
-    <Nav />
-    <Tab />
+    <IconContext.Provider
+      value={{ style: { verticalAlign: "middle", fontSize: "1.2em" } }}
+    >
+      <Nav />
+      <Tab />
+    </IconContext.Provider>
   </History>
 );
 export default App;
