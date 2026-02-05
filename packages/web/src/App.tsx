@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import { Modal } from "./components/Modal";
 import Nav, { useNavTab } from "./components/Nav";
 import PinCard from "./components/PinCard";
+import Profile from "./components/Profile";
 import Reviews from "./components/Reviews";
 import { History } from "./hooks/history";
 import { Lazy } from "./hooks/promise";
@@ -84,7 +85,7 @@ const Tab404 = ({ tab }: { tab: string }) => (
 const Routes: { [tab: string]: ComponentType<{ tab: string }> } = {
   company: TabCompany,
   access: TabAccess,
-  profile: Tab404,
+  profile: Profile,
 };
 
 const Tab = () => {

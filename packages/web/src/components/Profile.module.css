@@ -1,0 +1,82 @@
+.profile {
+  display: flex;
+  gap: 1em;
+}
+
+.buttons {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  gap: 0.5em;
+  padding: 0.5em;
+}
+.buttons > button {
+  color: #293f5c;
+  border: none;
+  background: #dce1e7;
+  cursor: pointer;
+}
+
+.intro {
+  flex: 1 1 auto;
+  border: 2px solid gray;
+  margin: 1em;
+  position: relative;
+}
+.intro > h3 {
+  padding: 0.5em;
+  margin: 0;
+  border-bottom: 2px solid gray;
+}
+.intro > div {
+  padding: 0.5em;
+  color: #666;
+}
+.intro p {
+  margin: 0.2em;
+}
+
+.point {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+.point > * {
+  padding: 0.2em 0.5em;
+}
+.point > label {
+  border: 1px solid gray;
+  font-size: 1.2em;
+}
+.point > label > span {
+  display: block;
+  color: #666;
+}
+.point > label > input {
+  border: none;
+  text-align: right;
+  width: 6em;
+  font-size: inherit;
+}
+.point > label > small {
+  color: #4886c3;
+}
+.point button {
+  background: #4886c3;
+  color: white;
+  border: none;
+  font-size: 1.2em;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.message > * {
+  position: relative;
+}
